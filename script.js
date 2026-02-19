@@ -13,11 +13,11 @@ let gameOver = false;
 btn.addEventListener("click", () => {
     if (!isPlaying) {
         music.play();
-        btn.textContent = "🔇 Stop Music";
+        btn.textContent = "🔇 Pause Track";
     }
     else {
         music.pause();
-        btn.textContent = "🔊 Play Music";
+        btn.textContent = "🔊 Play\u00A0\u00A0Track";
     }
     isPlaying = !isPlaying;
 });
