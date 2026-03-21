@@ -5,10 +5,19 @@ const resetBtn = document.getElementById("reset");
 const hamburger = document.querySelector(".hamburger");
 const Close = document.querySelector(".close");
 const navLinks = document.querySelector(".nav-links");
+const navbar = document.querySelector(".navbar");
 let boxes = document.getElementsByClassName("box");
 let turn = "X";
 let isPlaying = false;
 let gameOver = false;
+
+const setNavbarHeight = () => {
+    const height = navbar.offsetHeight;
+    document.documentElement.style.setProperty('--navbar-height', `${height}px`);
+};
+
+window.addEventListener('load', setNavbarHeight);
+window.addEventListener('resize', setNavbarHeight);
 
 btn.addEventListener("click", () => {
     if (!isPlaying) {

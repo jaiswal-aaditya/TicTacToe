@@ -145,9 +145,11 @@
     .win-box {
         background-color: #bd009a;
     }
+
     .box.win-box:hover {
         background-color: #e600bb;
     }
+
     .win-line {
         cursor: pointer;
         background-color: #ea8e0e;
@@ -257,10 +259,10 @@
 
         .nav-links {
             position: fixed;
-            top: 6.8%;
+            top: var(--navbar-height);
             left: -580px;
             z-index: 999;
-            height: 84vh;
+            height: calc(100vh - var(--navbar-height));
             width: 45vw;
             background-color: rgba(131, 21, 234, 0.672);
             backdrop-filter: blur(7px);
