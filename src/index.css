@@ -1,0 +1,6 @@
+/* Omit Tailwind Preflight to prevent UI breakage in existing vanilla code before React integration*/
+
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);

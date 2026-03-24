@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/img/square-guard.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="/square-guard.svg" type="image/x-icon">
     <title>TicTacToe</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="script.js"></script>
+    <link rel="stylesheet" href="/src/style.css">
+    <script type="module" src="/src/script.js"></script>
+    <script type="module" src="/src/main.jsx"></script>
 </head>
 
 <body>
     <header class="navbar">
         <div class="container">
             <a href="index.html" class="logo-container">
-                <img src="assets/img/logo.svg" alt="Home" class="logo-img" height="40px">
+                <img src="/src/assets/img/logo.svg" alt="Home" class="logo-img" height="40px">
                 <span class="logo-text">TICTAC<span>TOE</span></span>
             </a>
 
@@ -48,7 +49,7 @@
             </nav>
         </div>
     </header>
-    <div class="game-container">
+    <div id="ultimate-react" class="game-container">
         <div class="containers">
             <div class="win-line"></div>
             <div class="box bl-0 bt-0"><img width="90%" hidden></div>
@@ -65,17 +66,17 @@
         <div class="game-info">
             <button id="music-btn">🔊 Play&nbsp;&nbsp;Track</button>
             <audio id="bg-music" loop>
-                <source src="assets/audio/dark(shifumi).mp3" type="audio/mpeg">
+                <source src="/audio/dark(shifumi).mp3" type="audio/mpeg">
             </audio>
 
             <h1>Welcome To TicTacToe</h1>
             <div class="turn">
-                <span class="info"><span>Turn: </span><img src="assets/img/triangle-guard.svg" alt="X"
+                <span class="info"><span>Turn: </span><img src="/src/assets/img/triangle-guard.svg" alt="X"
                         width="50%"></span>
                 <button id="reset">Reset</button>
             </div>
             <div class="imgbox">
-                <img src="assets/img/win.gif" alt="Win" width="0px">
+                <img src="/src/assets/img/win.gif" alt="Win" width="0px">
             </div>
         </div>
     </div>

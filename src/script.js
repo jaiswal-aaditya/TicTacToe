@@ -1,3 +1,8 @@
+import triangleImg from './assets/img/triangle.webp';
+import circleImg from './assets/img/circle.webp';
+import triangleGuard from './assets/img/triangle-guard.svg';
+import circleGuard from './assets/img/circle-guard.svg';
+
 console.log("Welcome to TicTacToe")
 const music = document.getElementById("bg-music");
 const btn = document.getElementById("music-btn");
@@ -76,13 +81,13 @@ Array.from(boxes).forEach(element => {
         const img = element.querySelector("img");
         const player = document.querySelector(".info img");
         if (img.hidden) {
-            img.src = turn === "X" ? "assets/img/triangle.webp" : "assets/img/circle.webp";
+            img.src = turn === "X" ? triangleImg : circleImg;
             img.alt = turn;
             img.hidden = false;
             turn = turn === "X" ? "O" : "X";
             checkWin();
             if (!gameOver) {
-                player.src = turn === "X" ? "assets/img/triangle-guard.svg" : "assets/img/circle-guard.svg";
+                player.src = turn === "X" ? triangleGuard : circleGuard;
                 player.alt = turn;
             }
         }
@@ -99,7 +104,7 @@ resetBtn.addEventListener("click", () => {
     });
     turn = "X";
     gameOver = false;
-    document.querySelector(".info img").src = "assets/img/triangle-guard.svg";
+    document.querySelector(".info img").src = triangleGuard;
     document.querySelector(".info img").alt = turn;
     document.querySelector(".info span").innerText = "Turn: ";
     document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "0";
