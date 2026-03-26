@@ -5,12 +5,11 @@ import circleGuard from './assets/img/circle-guard.svg';
 
 console.log("Welcome to TicTacToe")
 const music = document.getElementById("bg-music");
-const btn = document.getElementById("music-btn");
-const resetBtn = document.getElementById("reset");
 const hamburger = document.querySelector(".hamburger");
-const Close = document.querySelector(".close");
+const close = document.querySelector(".close");
 const navLinks = document.querySelector(".nav-links");
 const navbar = document.querySelector(".navbar");
+const app = document.getElementById("ultimate-tictactoe");
 let boxes = document.getElementsByClassName("box");
 let turn = "X";
 let isPlaying = false;
@@ -20,21 +19,6 @@ const setNavbarHeight = () => {
     const height = navbar.offsetHeight;
     document.documentElement.style.setProperty('--navbar-height', `${height}px`);
 };
-
-window.addEventListener('load', setNavbarHeight);
-window.addEventListener('resize', setNavbarHeight);
-
-btn.addEventListener("click", () => {
-    if (!isPlaying) {
-        music.play();
-        btn.textContent = "🔇 Pause Track";
-    }
-    else {
-        music.pause();
-        btn.textContent = "🔊 Play\u00A0\u00A0Track";
-    }
-    isPlaying = !isPlaying;
-});
 
 const checkWin = () => {
     let imgboxes = document.querySelectorAll(".containers img");
@@ -75,49 +59,71 @@ const checkWin = () => {
     };
 };
 
-Array.from(boxes).forEach(element => {
-    element.addEventListener("click", () => {
-        if (gameOver) return;
-        const img = element.querySelector("img");
-        const player = document.querySelector(".info img");
-        if (img.hidden) {
-            img.src = turn === "X" ? triangleImg : circleImg;
-            img.alt = turn;
-            img.hidden = false;
-            turn = turn === "X" ? "O" : "X";
-            checkWin();
-            if (!gameOver) {
-                player.src = turn === "X" ? triangleGuard : circleGuard;
-                player.alt = turn;
-            }
-        }
-    })
-});
-
-resetBtn.addEventListener("click", () => {
-    Array.from(boxes).forEach(box => {
-        const img = box.querySelector("img");
-        img.src = "";
-        img.alt = "";
-        img.hidden = true;
-        box.classList.remove("win-box");
-    });
-    turn = "X";
-    gameOver = false;
-    document.querySelector(".info img").src = triangleGuard;
-    document.querySelector(".info img").alt = turn;
-    document.querySelector(".info span").innerText = "Turn: ";
-    document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "0";
-    document.querySelector(".win-line").style.transform = "scaleX(0.00000000000000000001)";
-});
+window.addEventListener('load', setNavbarHeight);
+window.addEventListener('resize', setNavbarHeight);
 
 hamburger.addEventListener("click", () => {
     navLinks.classList.toggle("active");
     hamburger.classList.toggle("active");
-    Close.classList.toggle("active");
+    close.classList.toggle("active");
 });
-Close.addEventListener("click", () => {
+
+close.addEventListener("click", () => {
     navLinks.classList.remove("active");
     hamburger.classList.remove("active");
-    Close.classList.remove("active");
+    close.classList.remove("active");
+});
+
+app.addEventListener("click", (e) => {
+    const box = e.target.closest(".box");
+    const resetBtn = e.target.closest("#reset");
+    const musicBtn = e.target.closest("#music-btn");
+
+    if (box) {
+        if (gameOver) return;
+
+        const img = box.querySelector("img");
+        if (!img || !img.hidden) return;
+        img.src = turn === "X" ? triangleImg : circleImg;
+        img.alt = turn;
+        img.hidden = false;
+        turn = turn === "X" ? "O" : "X";
+        checkWin();
+
+        const player = document.querySelector(".info img");
+        if (!gameOver) {
+            player.src = turn === "X" ? triangleGuard : circleGuard;
+            player.alt = turn;
+        }
+    }
+
+    else if (resetBtn) {
+        Array.from(boxes).forEach(box => {
+            const img = box.querySelector("img");
+            img.src = "";
+            img.alt = "";
+            img.hidden = true;
+            box.classList.remove("win-box");
+        });
+
+        turn = "X";
+        gameOver = false;
+
+        app.querySelector(".info img").src = triangleGuard;
+        app.querySelector(".info img").alt = turn;
+        app.querySelector(".info span").innerText = "Turn: ";
+        app.querySelector(".imgbox img").style.width = "0";
+        app.querySelector(".win-line").style.transform =
+            "scaleX(0.00000000000000000001)";
+    }
+    else if (musicBtn) {
+        if (!isPlaying) {
+            music.play();
+            musicBtn.textContent = "🔇 Pause Track";
+        } else {
+            music.pause();
+            musicBtn.textContent = "🔊 Play\u00A0\u00A0Track";
+        }
+        isPlaying = !isPlaying;
+    }
 });

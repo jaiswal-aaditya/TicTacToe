@@ -14,7 +14,7 @@
 <body>
     <header class="navbar">
         <div class="container">
-            <a href="index.html" class="logo-container">
+            <a href="/" id="home" class="logo-container">
                 <img src="/src/assets/img/logo.svg" alt="Home" class="logo-img" height="40px">
                 <span class="logo-text">TICTAC<span>TOE</span></span>
             </a>
@@ -22,7 +22,7 @@
             <nav>
                 <ul class="nav-links">
                     <li><a class="disabled" href="#">About</a></li>
-                    <li><a class="disabled" href="#">Login</a></li>
+                    <li><a id="ultimate" href="/ultimate">Ultimate</a></li>
                     <li><a class="disabled" href="#">Contact</a></li>
                     <li><a class="github-link" href="https://github.com/jaiswal-aaditya/TicTacToe" target="_blank"
                             rel="noopener noreferrer">
@@ -49,34 +49,36 @@
             </nav>
         </div>
     </header>
-    <div id="ultimate-react" class="game-container">
-        <div class="containers">
-            <div class="win-line"></div>
-            <div class="box bl-0 bt-0"><img width="90%" hidden></div>
-            <div class="box bt-0"><img width="90%" hidden></div>
-            <div class="box br-0 bt-0"><img width="90%" hidden></div>
-            <div class="box bl-0"><img width="90%" hidden></div>
-            <div class="box"><img width="90%" hidden></div>
-            <div class="box br-0"><img width="90%" hidden></div>
-            <div class="box bl-0 bb-0"><img width="90%" hidden></div>
-            <div class="box bb-0"><img width="90%" hidden></div>
-            <div class="box br-0 bb-0"><img width="90%" hidden></div>
-        </div>
-
-        <div class="game-info">
-            <button id="music-btn">🔊 Play&nbsp;&nbsp;Track</button>
-            <audio id="bg-music" loop>
-                <source src="/audio/dark(shifumi).mp3" type="audio/mpeg">
-            </audio>
-
-            <h1>Welcome To TicTacToe</h1>
-            <div class="turn">
-                <span class="info"><span>Turn: </span><img src="/src/assets/img/triangle-guard.svg" alt="X"
-                        width="50%"></span>
-                <button id="reset">Reset</button>
+    <div id="ultimate-tictactoe">
+        <div class="game-container">
+            <div class="containers">
+                <div class="win-line"></div>
+                <div class="box bl-0 bt-0"><img width="90%" hidden></div>
+                <div class="box bt-0"><img width="90%" hidden></div>
+                <div class="box br-0 bt-0"><img width="90%" hidden></div>
+                <div class="box bl-0"><img width="90%" hidden></div>
+                <div class="box"><img width="90%" hidden></div>
+                <div class="box br-0"><img width="90%" hidden></div>
+                <div class="box bl-0 bb-0"><img width="90%" hidden></div>
+                <div class="box bb-0"><img width="90%" hidden></div>
+                <div class="box br-0 bb-0"><img width="90%" hidden></div>
             </div>
-            <div class="imgbox">
-                <img src="/src/assets/img/win.gif" alt="Win" width="0px">
+
+            <div class="game-info">
+                <button id="music-btn">🔊 Play&nbsp;&nbsp;Track</button>
+                <audio id="bg-music" loop>
+                    <source src="/audio/dark(shifumi).mp3" type="audio/mpeg">
+                </audio>
+
+                <h1>Welcome To TicTacToe</h1>
+                <div class="turn">
+                    <span class="info"><span>Turn: </span><img src="/src/assets/img/triangle-guard.svg" alt="X"
+                            width="50%"></span>
+                    <button id="reset">Reset</button>
+                </div>
+                <div class="imgbox">
+                    <img src="/src/assets/img/win.gif" alt="Win" width="0px">
+                </div>
             </div>
         </div>
     </div>

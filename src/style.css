@@ -74,9 +74,10 @@
         color: #ffffff;
         font-weight: 600;
         transition: color 0.3s ease;
+        padding: 10px;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover{
         color: #c0dcff;
     }
 
