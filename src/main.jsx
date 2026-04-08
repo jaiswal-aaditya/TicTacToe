@@ -136,5 +136,8 @@ ultimateBtn.addEventListener('click', (e) => {
 homeBtn.addEventListener('click', (e) => {
   e.preventDefault()
   window.history.pushState({}, "", "/")
+  navLinks.classList.remove("active")
+  hamburger.classList.remove("active")
+  close.classList.remove("active")
   unMountReact()
 })
