@@ -38,9 +38,15 @@ const checkWin = () => {
 
             document.querySelector(".info span").innerText = "Won:  ";
             document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "45%";
-            boxes[e[0]].classList.add("win-box")
-            boxes[e[1]].classList.add("win-box")
-            boxes[e[2]].classList.add("win-box")
+            if (imgboxes[e[0]].alt === "X") {
+                boxes[e[1]].classList.add("win-box-X");
+                boxes[e[2]].classList.add("win-box-X");
+                boxes[e[0]].classList.add("win-box-X");
+            } else{
+                boxes[e[1]].classList.add("win-box-O");
+                boxes[e[2]].classList.add("win-box-O");
+                boxes[e[0]].classList.add("win-box-O");
+            }
             gameOver = true;
         }
     });
@@ -81,12 +87,22 @@ app.addEventListener("click", (e) => {
 
     if (box) {
         if (gameOver) return;
-
         const img = box.querySelector("img");
         if (!img || !img.hidden) return;
-        img.src = turn === "X" ? triangleImg : circleImg;
+
+        if (turn === "X") {
+        img.src = triangleImg;
+        img.style.filter = `
+            hue-rotate(205deg)
+            saturate(2)
+        `;
+        } else {
+            img.src = circleImg;
+            img.style.filter = "none";
+        }
         img.alt = turn;
         img.hidden = false;
+
         turn = turn === "X" ? "O" : "X";
         checkWin();
 
@@ -103,7 +119,9 @@ app.addEventListener("click", (e) => {
             img.src = "";
             img.alt = "";
             img.hidden = true;
-            box.classList.remove("win-box");
+            img.style.filter = "none";
+            box.classList.remove("win-box-X");
+            box.classList.remove("win-box-O");
         });
 
         turn = "X";

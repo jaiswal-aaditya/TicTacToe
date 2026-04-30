@@ -6,12 +6,65 @@ const UltimateBoard = () => {
     const [activeBoard, setActiveBoard] = useState(null);
     const [xIsNext, setXIsNext] = useState(true);
 
+    const [boardWinners, setBoardWinners] = useState(Array(9).fill(null));
+    const [ultimateWinner, setUltimateWinner] = useState(null);
+
+    const checkWin = (miniBoard) => {
+        const wins = [
+            [0, 1, 2], 
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7], 
+            [2, 5, 8],
+            [0, 4, 8], 
+            [2, 4, 6]
+        ];
+        for (let i = 0; i < wins.length; i++) {
+            const [a, b, c] = wins[i];
+            if (miniBoard[a] && miniBoard[a] === miniBoard[b] && miniBoard[a] === miniBoard[c]) {
+                return miniBoard[a];
+            }
+        }
+        return null;
+    };
+    
     const handleCellClick = (boardIdx, cellIdx) => {
+        if (ultimateWinner) return; 
+        if (boardWinners[boardIdx]) return; 
+        if (boards[boardIdx][cellIdx]) return;
+
+        // Update the specific cell
         const newBoards = [...boards];  
         newBoards[boardIdx] = [...newBoards[boardIdx]];
         newBoards[boardIdx][cellIdx] = xIsNext ? 'X' : 'O';
         setBoards(newBoards);
-        setActiveBoard(cellIdx);
+
+        // Check if this move won the MiniBoard
+        const smallBoardWinner = checkWin(newBoards[boardIdx]);
+        let newBoardWinners = [...boardWinners];
+        if (smallBoardWinner) {
+            newBoardWinners[boardIdx] = smallBoardWinner;
+            setBoardWinners(newBoardWinners);
+
+            // Check if winning this MiniBoard won the Ultimate Game
+            const globalWinner = checkWin(newBoardWinners);
+            if (globalWinner) {
+                setUltimateWinner(globalWinner);
+                setActiveBoard(null);
+                return;
+            }
+        }
+
+        // Determine where the next player must go
+        const isTargetBoardWon = newBoardWinners[cellIdx] !== null;
+        const isTargetBoardFull = newBoards[cellIdx].every(cell => cell !== null);
+        if (isTargetBoardWon || isTargetBoardFull) {
+            setActiveBoard(null);
+        } else {
+            setActiveBoard(cellIdx); 
+        }
+
         setXIsNext(!xIsNext);
     };
 
@@ -32,8 +85,9 @@ const UltimateBoard = () => {
                     boardIndex={i}
                     cells={miniBoardCells}
                     onCellClick={handleCellClick}
-                    isActive={activeBoard === null || activeBoard === i}
-                    isCurrentPlayerX={xIsNext} />                
+                    isActive={!ultimateWinner && (activeBoard === null || activeBoard === i)}
+                    isCurrentPlayerX={xIsNext}
+                    winner={boardWinners[i]} />                
             ))}
 
         </div>

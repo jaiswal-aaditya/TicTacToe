@@ -142,11 +142,19 @@
         cursor: pointer;
     }
 
-    .win-box {
-        background-color: #bd009a;
+    .win-box-X {
+        background-color: #009fa4;
     }
 
-    .box.win-box:hover {
+    .win-box-O {
+        background-color: #bd009a;
+    }
+    
+    .box.win-box-X:hover {
+        background-color: #00c0c6;
+    }
+    
+    .box.win-box-O:hover {
         background-color: #e600bb;
     }
 

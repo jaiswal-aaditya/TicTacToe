@@ -30,7 +30,7 @@ const Cell = ({ value, onClick, disabled, isCurrentPlayerX }) => {
 
             onClick={onClick}
             disabled={disabled || value !== null}>
-            {value === 'X' && <img src={squareImg} className="w-full -translate-y-px drop-shadow-[0_0_8px_#00f7ff] brightness-105 saturate-150 hue-rotate-205 select-none pointer-events-none" alt="X"
+            {value === 'X' && <img src={squareImg} className="w-full -translate-y-px drop-shadow-[0_0_8px_#00f7ff] brightness-105 saturate-200 hue-rotate-205 select-none pointer-events-none" alt="X"
             onError={() => setHasImageError(true) }
             onLoad={() =>  setHasImageError(false) } />}
 
