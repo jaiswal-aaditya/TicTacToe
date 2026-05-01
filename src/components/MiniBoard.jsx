@@ -2,12 +2,20 @@ import Cell from './Cell';
 import squareImg from '../assets/img/square.webp';
 import circleImg from '../assets/img/circle.webp';
 
-const MiniBoard = ({ cells, boardIndex, onCellClick, isActive, isCurrentPlayerX, winner }) => {
+const MiniBoard = ({ cells, boardIndex, onCellClick, isActive, isCurrentPlayerX, winner, winLine }) => {
     if (winner) {
         return (
-            <div className="flex items-center justify-center p-2">
-                 {winner === 'X' && <img src={squareImg} className="w-full saturate-200 hue-rotate-205 select-none pointer-events-none" alt="X won" />}
-                 {winner === 'O' && <img src={circleImg} className="w-full select-none pointer-events-none" alt="O won" />}
+            <div className={`md:p-2
+            ${winLine?.includes(boardIndex)
+            ? winner === 'X'
+                ? 'bg-[#009fa4] hover:bg-[#00c0c6]'
+                : winner === 'O'
+                    ? 'bg-[#bd009a] hover:bg-[#e600bb]'
+                    : ''
+            : '' }`}>
+
+                {winner === 'X' && <img src={squareImg} className="w-full saturate-200 hue-rotate-205 select-none pointer-events-none" alt="X won" />}
+                {winner === 'O' && <img src={circleImg} className="w-full select-none pointer-events-none" alt="O won" />}
             </div>
         );
     }
