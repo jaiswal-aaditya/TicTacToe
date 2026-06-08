@@ -7,9 +7,13 @@ const UltimateBoard = () => {
     const [xIsNext, setXIsNext] = useState(true);
 
     const [boardWinners, setBoardWinners] = useState(Array(9).fill(null));
+    const [miniBoardWinLines, setMiniBoardWinLines] = useState(Array(9).fill(null));
+    
     const [ultimateWinner, setUltimateWinner] = useState(null);
     const [ultimateWinningLine, setUltimateWinningLine] = useState(null);
     const [showWinLine, setShowWinLine] = useState(false);
+
+    const line = ultimateWinningLine?.join('');
 
     const checkWin = (miniBoard) => {
         const wins = [
@@ -32,6 +36,15 @@ const UltimateBoard = () => {
                 };
             }
         }
+         // Check Draw state
+        const isDraw = miniBoard.every(cell => cell !== null);
+
+        if (isDraw) {
+            return {
+                winner: 'D',
+                line: null
+            };
+        }
         return {
             winner: null,
             line: null
@@ -49,16 +62,24 @@ const UltimateBoard = () => {
         newBoards[boardIdx][cellIdx] = xIsNext ? 'X' : 'O';
         setBoards(newBoards);
 
-        // Check if this move won the MiniBoard
         const result = checkWin(newBoards[boardIdx]);
         let newBoardWinners = [...boardWinners];
+        // Check if this move won the MiniBoard
         if (result.winner) {
             newBoardWinners[boardIdx] = result.winner;
             setBoardWinners(newBoardWinners);
-
+            
+            if (result.winner === 'X' || result.winner === 'O') {
+                // Save the specific line array (e.g., [0,1,2]) for this specific board index
+                setMiniBoardWinLines(prev => {
+                    const updated = [...prev];
+                    updated[boardIdx] = result.line;
+                    return updated;
+                });
+            }
             // Check if winning this MiniBoard won the Ultimate Game
             const globalResult = checkWin(newBoardWinners);
-            if (globalResult.winner) {
+            if (globalResult.winner === 'X' || globalResult.winner === 'O') {
                 setUltimateWinner(globalResult.winner);
                 setUltimateWinningLine(globalResult.line);
                 setTimeout(() => {
@@ -67,15 +88,23 @@ const UltimateBoard = () => {
                 setActiveBoard(null);
                 return;
             }
+            else if (globalResult.winner === 'D') {
+                setUltimateWinner('D');
+                setActiveBoard(null);
+                return;
+            }
         }
 
         // Determine where the next player must go
-        const isTargetBoardWon = newBoardWinners[cellIdx] !== null;
-        const isTargetBoardFull = newBoards[cellIdx].every(cell => cell !== null);
-        if (isTargetBoardWon || isTargetBoardFull) {
+        const isTargetBoardBlocked =
+            newBoardWinners[cellIdx] === 'X' ||
+            newBoardWinners[cellIdx] === 'O' ||
+            newBoardWinners[cellIdx] === 'D';
+
+        if (isTargetBoardBlocked) {
             setActiveBoard(null);
         } else {
-            setActiveBoard(cellIdx); 
+            setActiveBoard(cellIdx);
         }
 
         setXIsNext(!xIsNext);
@@ -92,7 +121,7 @@ const UltimateBoard = () => {
             <div className="absolute h-1 rounded-full inset-x-0 top-1/3 -translate-y-1/2  bg-slate-800/90 shadow-[0_0_10px_rgba(57,255,20,0.4),0_0_3px_rgba(57,255,20,0.5)]" />
             <div className="absolute h-1 rounded-full inset-x-0 top-2/3 -translate-y-1/2 bg-slate-800/90 shadow-[0_0_10px_rgba(57,255,20,0.4),0_0_3px_rgba(57,255,20,0.5)]" />
 
-            {/* Ultimate win line */}
+            {/* Ultimate win line logic */}
             {ultimateWinner && (
                 <div
                     className={`
@@ -105,60 +134,60 @@ const UltimateBoard = () => {
                     `}
                     style={{
                         width:
-                            ultimateWinningLine.join('') === '012' ||
-                            ultimateWinningLine.join('') === '345' ||
-                            ultimateWinningLine.join('') === '678'
-                                ? '90%'
+                            line === '012' ||
+                            line === '345' ||
+                            line === '678'
+                                ? '95%'
 
-                                :ultimateWinningLine.join('') === '048' ||
-                                 ultimateWinningLine.join('') === '246'
-                                    ? '120%'
+                                :line === '048' ||
+                                 line === '246'
+                                    ? '130%'
 
                                     : '6px',
 
                         height:
-                            ultimateWinningLine.join('') === '036' ||
-                            ultimateWinningLine.join('') === '147' ||
-                            ultimateWinningLine.join('') === '258'
-                                ? '90%'
+                            line === '036' ||
+                            line === '147' ||
+                            line === '258'
+                                ? '95%'
 
                                 : '6px',
 
                         top:
-                            ultimateWinningLine.join('') === '012'
+                            line === '012'
                                 ? '16.5%'
-                                : ultimateWinningLine.join('') === '345'
+                                : line === '345'
                                     ? '50%'
-                                    : ultimateWinningLine.join('') === '678'
+                                    : line === '678'
                                         ? '83.5%'
                                         : '50%',
 
                         left:
-                            ultimateWinningLine.join('') === '036'
+                            line === '036'
                                 ? '16.5%'
-                                : ultimateWinningLine.join('') === '147'
+                                : line === '147'
                                     ? '50%'
-                                    : ultimateWinningLine.join('') === '258'
+                                    : line === '258'
                                         ? '83.5%'
                                         : '50%',
 
                         transform:`
                             translate(-50%, -50%)
                         
-                            ${ultimateWinningLine.join('') === '048'
+                            ${line === '048'
                                 ? 'rotate(45deg)'
-                                : ultimateWinningLine.join('') === '246'
+                                : line === '246'
                                     ? 'rotate(-45deg)'
                                     : ''
                             }
 
                             ${
-                            ultimateWinningLine.join('') === '036' ||
-                            ultimateWinningLine.join('') === '147' ||
-                            ultimateWinningLine.join('') === '258'
+                            line === '036' ||
+                            line === '147' ||
+                            line === '258'
                                 ? `scaleY(${showWinLine ? 1 : 0})`
-                                : ultimateWinningLine.join('') === '048' ||
-                                  ultimateWinningLine.join('') === '246'
+                                : line === '048' ||
+                                  line === '246'
                                     ? `scale(${showWinLine ? 1 : 0})`
                                     : `scaleX(${showWinLine ? 1 : 0})`
                             }
@@ -175,6 +204,7 @@ const UltimateBoard = () => {
                     isActive={!ultimateWinner && (activeBoard === null || activeBoard === i)}
                     isCurrentPlayerX={xIsNext}
                     winner={boardWinners[i]}
+                    miniBoardWinLine={miniBoardWinLines[i]}
                     winLine={ultimateWinningLine} />                
             ))}
 
