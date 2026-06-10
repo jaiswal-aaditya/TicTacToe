@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import { initializeClassicGame } from './script.js';
 import App from './App.jsx'
 
 const ultimateBtn = document.getElementById('ultimate')
@@ -16,6 +17,7 @@ const classicContainer = ultimateContainer.cloneNode(true).childNodes
 let root = null
 
 function mountReact() {
+  initializeClassicGame();
   if (!root) {
     root = createRoot(ultimateContainer)
   }
@@ -32,6 +34,7 @@ function unMountReact() {
     root = null
   }
   ultimateContainer.replaceChildren(...Array.from(classicContainer).map(node => node.cloneNode(true)))
+  initializeClassicGame();
 }
 
 function render404() {
@@ -135,6 +138,14 @@ ultimateBtn.addEventListener('click', (e) => {
 
 homeBtn.addEventListener('click', (e) => {
   e.preventDefault()
+  if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+    navLinks.classList.remove("active")
+    hamburger.classList.remove("active")
+    close.classList.remove("active")
+    initializeClassicGame();
+    return
+  }
+  
   window.history.pushState({}, "", "/")
   navLinks.classList.remove("active")
   hamburger.classList.remove("active")
