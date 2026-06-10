@@ -1,7 +1,15 @@
 # 🕹️ Tic-Tac-Toe — Squid Game Edition
 
-A modern, responsive, and visually engaging **Tic-Tac-Toe** game inspired by the *Squid Game* theme.  
-Built using **HTML5, Vanilla CSS3 and Vanilla JavaScript**.
+A modern, responsive, and visually engaging **Tic-Tac-Toe** game featuring both **Classic** and **Ultimate** modes, inspired by the *Squid Game* theme.
+
+This project is a **Hybrid Web Application**: 
+- 🟢 **Classic Mode** built using **HTML5, CSS3, and Vanilla JavaScript** 
+
+- 🔴 **Ultimate Mode** built using **React 19** 
+
+- 🧭 Navigation and routing are handled using a **custom client-side history-based routing logic** (using the **History API**), with dynamic mounting/unmounting of React and Vanilla JS views
+
+- 🚧 Includes a custom **404 Page Not Found** fallback page with proper fallback routing for invalid routes and undefined paths
 
 ---
 
@@ -10,23 +18,64 @@ Built using **HTML5, Vanilla CSS3 and Vanilla JavaScript**.
 
 ---
 
+## 🛠️ Tech Stack
+
+This project leverages a **Hybrid Web Architecture** to deliver two completely distinct gameplay mechanics within a unified application layout:
+
+- **Frontend Core (Classic Mode):** Built with raw **HTML5, semantic CSS3, and Vanilla JavaScript (ES6+)** to maintain a lightweight execution context for the traditional board.
+
+- **Component-Driven Framework (Ultimate Mode):** Powered by **React 19** to smoothly manage complex game state changes, handle automatic mini-board flips, and bring in the 3D effects needed for Ultimate Tic-Tac-Toe.
+
+- **Styling & Presentation:** Component layouts utilize **Tailwind CSS v4** combined with native CSS 3D transforms (`perspective-1000`, `backface-hidden`).
+
+- **Build System & Tooling:** Organized via **Vite v8** for lightning-fast Hot Module Replacement (HMR) and optimized distribution builds, linted strictly using modern flat **ESLint** configurations.
+
+---
+
 ## 🚀 Features
 
-- **Themed Gameplay** — Traditional X and O replaced with Triangle and Circle guards  
-- **Background Music** — “Mingle” track with play / pause toggle  
-- **Smart Win Detection** — Automatically detects winning combinations and draws a line across them  
-- **Visual Feedback** — Victory animation and highlighted winning tiles  
-- **Fully Responsive** — Optimized for desktop and mobile with a custom hamburger menu  
+- **Hybrid Architecture** — Vanilla JS for classic gameplay + React for Ultimate mode.
+
+- **Manual Routing System** — Custom navigation between game modes without libraries.
+
+- **Themed Gameplay** — Traditional X and O replaced with Triangle and Circle guards.
+
+- **Innovative 3D Card-Flipping Interface:** In Ultimate Mode, completed mini-boards 
+dynamically undergo a CSS 3D turn-around sequence to lock in their overall grid score using full-scale Square and Circle Guard masks.
+
+- **Smart Win Detection:** Dynamically identifies winning patterns and renders win lines using CSS transforms (rotate, translate, scaleX) for instant visual feedback.  
+
+- **Background Music** — Squid Game–style tension track with play/pause toggle.
+
+- **Visual Feedback** — Victory animation and highlighted winning tiles.
+
+- **Fully Responsive** — Optimized for desktop and mobile with a custom hamburger menu.
 
 ---
 
 ## 🎮 How to Play
 
-1. **Start** — The Triangle player (X) goes first  
-2. **Gameplay** — Click any empty cell to place your mark  
-3. **Win** — Align three symbols horizontally, vertically, or diagonally  
-4. **Audio** — Use the 🔊 Play Music button to toggle background music  
-5. **Reset** — Click Reset anytime to start a new game  
+### 🟢 Classic Mode Rules
+Classic mode follows the standard rules of Tic-Tac-Toe, elevated with themed imagery:
+1. **The Order:** The Triangle Guard (acting as X) takes the first initiative, followed sequentially by the Circle Guard (acting as O).
+
+2. **Gameplay:** Players take turns clicking an empty cell on the 3x3 grid to claim it with their designated asset token.
+
+3. **Winning:** The first player to align three matching symbols in a continuous horizontal, vertical, or diagonal vector wins the round.
+
+4. **Draw:** If all 9 cells are claimed and no player has secured a matching trio line, the match is officially declared a Draw.
+
+### 🔴 Ultimate Mode Rules
+Ultimate Mode introduces a 3×3 “meta grid” made up of smaller 3×3 mini-boards:
+1. **The Macro Target:** To win the global match, a player must align three completed *Mini-Boards* in a row (horizontally, vertically, or diagonally).
+
+2. **The Forced Vector:** Your opponent’s exact move on a specific cell index inside a Mini-Board **dictates** the precise Mini-Board coordinate your next move must occur within. 
+
+    *(e.g., If Player 1 plays in the top-right cell of **any** Mini-Board, Player 2 is strictly forced to make their next placement inside the top-right Mini-Board).*
+
+3. **Open Target Board:** If a player's forced move sends them to a Mini-Board that is already won, drawn, or fully occupied, that player receives an open pass to make a move on **any** un-blocked active cell anywhere across the entire macro-board.
+
+4. **Mini-Board Flip:** Once a sub-grid is captured by securing 3 standard cells in a row, the entire block flips over via a 3D animation to display a macro Square, Circle, or combined Draw icon, solidifying that quadrant's value for the global grid.
 
 ---
 
@@ -34,24 +83,50 @@ Built using **HTML5, Vanilla CSS3 and Vanilla JavaScript**.
 
 ```text
 TicTacToe/
-├── assets/
-│   ├── audio/      # Background music (mingle.mp3)
-│   └── img/        # SVGs, WebP icons, victory GIFs
-├── index.html      # Game layout
-├── style.css       # Styling and responsiveness
-├── script.js       # Game logic
-└── LICENSE         # GNU General Public License v3.0
+├── public/                     # Static asset delivery root
+│   └── audio/                  # Ambient soundtrack files (.mp3)
+├── src/                        # React 19 source ecosystem
+│   ├── assets/img/             # Theme vector guards, raster assets, and GIFs
+│   ├── components/             # Modular component separation
+│   │   ├── Cell.jsx            # Lowest level element mapping & image loading
+│   │   ├── MiniBoard.jsx       # 3D backface grid encapsulation
+│   │   └── UltimateBoard.jsx   # Macro game state coordinator
+│   ├── App.jsx                 # React entry wrapper view 
+│   ├── index.css               # Global layout adjustments
+│   ├── main.jsx                # Application virtual DOM root mounting
+│   ├── script.js               # Vanilla JS core engine & global layout handlers
+│   └── style.css               # Core presentation layer layout styles
+├── index.html                  # Main HTML markup canvas
+├── eslint.config.js            # Strict code-quality syntax parameters
+├── package.json                # Dependency manifest and execution scripts
+├── vite.config.js              # Vite build orchestration configuration
+├── vercel.json                 # Configuration file for deployment and routing on Vercel
+└── LICENSE                     # GNU General Public License v3.0
 ```
 ---
 
 ## 🛠️ Installation & Usage
 
+### Running Locally with Live Reload ###
+This setup allows you to test both the Vanilla JS architecture and the React development pipeline simultaneously:
+
 1. **Clone the repository**:
 ```bash
 git clone https://github.com/jaiswal-aaditya/TicTacToe.git
 ```
-2. **Navigate to the project folder.**
-3. **Open `index.html` in any modern web browser to start playing.**
+2. **Navigate into the project workspace:**
+```bash
+cd TicTacToe
+```
+3. **Install development and framework dependencies:**
+```bash
+npm install
+```
+4. **Launch the local development environment:**
+```bash
+npm run dev
+```
+5. **Open the displayed local URL address (typically http://localhost:5173) inside your browser.**
 
 ---
 
@@ -83,11 +158,17 @@ Full credit goes to the original creators and platforms listed below.
 - Asset Link: [View original GIF](https://giphy.com/stickers/among-us-squid-game-squidgame-4BwiYSodoBKPRx6Lh2)
 - License: Downloaded from Giphy — used in accordance with Giphy Terms of Service
 
-### 🎵 Background Track
+### 🎵 Background Tracks
 - Source: [Pixabay](https://pixabay.com)
-- Track name: Squid Game Style Beat | Choir x Vocal | Dark (Shifumi)
-- Track link: [Listen on Pixabay](https://pixabay.com/music/beats-squid-game-style-beat-choir-x-vocal-dark-shifumi-288548/)
-- Artist: YellowBirdBeats
+- Track name: 
+    1. Squid Game Style Beat | Choir x Vocal | Dark (Shifumi)
+    2. Mingle Game
+- Track link: 
+    1. [Listen Dark(Shifumi) on Pixabay](https://pixabay.com/music/beats-squid-game-style-beat-choir-x-vocal-dark-shifumi-288548/)
+    2. [Listen Mingle Game on Pixabay](https://pixabay.com/music/pop-mingle-game-287042/)
+- Artists: 
+    1. Dark (Shifumi) by YellowBirdBeats
+    2. Mingle Game by freq88
 - License: Pixabay Content License
 
 ---
