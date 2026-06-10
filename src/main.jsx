@@ -6,6 +6,7 @@ import App from './App.jsx'
 
 const ultimateBtn = document.getElementById('ultimate')
 const homeBtn = document.getElementById('home')
+const githubLink = document.getElementById('github-repo-link');
 
 const navLinks = document.querySelector(".nav-links")
 const hamburger = document.querySelector(".hamburger")
@@ -152,3 +153,9 @@ homeBtn.addEventListener('click', (e) => {
   close.classList.remove("active")
   unMountReact()
 })
+
+githubLink.addEventListener('click', () => {
+  navLinks.classList.remove("active");
+  hamburger.classList.remove("active");
+  close.classList.remove("active");
+});

@@ -270,10 +270,10 @@
         .nav-links {
             position: fixed;
             top: var(--navbar-height);
-            left: -350px;
+            left: -480px;
             z-index: 999;
             height: calc(100vh - var(--navbar-height));
-            width: 45vw;
+            width: 55vw;
             background-color: rgba(131, 21, 234, 0.672);
             backdrop-filter: blur(7px);
             box-shadow: 4px 0px 20px -3px rgba(131, 21, 234, 0.55);
@@ -281,7 +281,7 @@
             gap: 2rem;
             padding: 1rem 1.5rem;
             border-radius: 10px;
-            transition: left 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+            transition: left 0.7s cubic-bezier(0.33, 1, 0.68, 1);
             display: flex;
             align-items: center;
         }
