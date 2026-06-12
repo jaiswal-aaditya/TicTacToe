@@ -15,6 +15,8 @@ let turn = "X";
 let isPlaying = false;
 let gameOver = false;
 
+document.querySelector(".info img").style.filter= "hue-rotate(205deg) saturate(2) brightness(105%)";
+
 const setNavbarHeight = () => {
     const height = navbar.offsetHeight;
     document.documentElement.style.setProperty('--navbar-height', `${height}px`);
@@ -85,6 +87,8 @@ app.addEventListener("click", (e) => {
     const resetBtn = e.target.closest("#reset");
     const musicBtn = e.target.closest("#music-btn");
 
+    const player = document.querySelector(".info img");
+
     if (box) {
         if (gameOver) return;
         const img = box.querySelector("img");
@@ -95,6 +99,7 @@ app.addEventListener("click", (e) => {
         img.style.filter = `
             hue-rotate(205deg)
             saturate(2)
+            brightness(105%)
         `;
         } else {
             img.src = circleImg;
@@ -105,10 +110,11 @@ app.addEventListener("click", (e) => {
 
         turn = turn === "X" ? "O" : "X";
         checkWin();
-
-        const player = document.querySelector(".info img");
+        
         if (!gameOver) {
             player.src = turn === "X" ? triangleGuard : circleGuard;
+            if(turn==="X") player.style.filter= "hue-rotate(205deg) saturate(2) brightness(105%)";
+            else player.style.filter="none";
             player.alt = turn;
         }
     }
@@ -126,6 +132,7 @@ app.addEventListener("click", (e) => {
 
         turn = "X";
         gameOver = false;
+        player.style.filter= "hue-rotate(205deg) saturate(2) brightness(105%)";
 
         app.querySelector(".info img").src = triangleGuard;
         app.querySelector(".info img").alt = turn;

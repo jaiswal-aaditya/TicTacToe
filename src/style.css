@@ -2,7 +2,7 @@
         margin: 0;
         box-sizing: border-box;
     }
-    
+
     body {
         background-color: #616161;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,6 +17,7 @@
         position: sticky;
         top: 0;
         z-index: 1000;
+        margin-bottom: 2px;
     }
 
     .container {
@@ -45,7 +46,7 @@
     }
 
     .logo-text {
-        font-size: 1.4rem;
+        font-size: 140%;
         font-weight: 700;
         color: rgba(255, 255, 255, 0.9);
         letter-spacing: 1px;
@@ -72,11 +73,12 @@
         text-decoration: none;
         color: #ffffff;
         font-weight: 600;
+        font-size: 110%;
         transition: color 0.3s ease;
         padding: 10px;
     }
 
-    .nav-links a:hover{
+    .nav-links a:hover {
         color: #c0dcff;
     }
 
@@ -114,7 +116,7 @@
 
     .game-container {
         /* background-color: red; */
-        margin-top: 50px;
+        margin-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -123,8 +125,8 @@
 
     .containers {
         display: grid;
-        grid-template-rows: repeat(3, clamp(100px, 10vw, 400px));
-        grid-template-columns: repeat(3, clamp(100px, 10vw, 400px));
+        grid-template-rows: repeat(3, clamp(110px, 12vw, 500px));
+        grid-template-columns: repeat(3, clamp(110px, 12vw, 500px));
         position: relative;
     }
 
@@ -149,11 +151,11 @@
     .win-box-O {
         background-color: #bd009a;
     }
-    
+
     .box.win-box-X:hover {
         background-color: #00c0c6;
     }
-    
+
     .box.win-box-O:hover {
         background-color: #e600bb;
     }
@@ -187,7 +189,8 @@
         padding: 0 50px;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
+        transform: scale(1.1);
     }
 
     .imgbox {
@@ -203,11 +206,12 @@
         transition: width 1s ease-in-out;
     }
 
-    #music-btn,
-    #reset {
+    .music,
+    .reset-btn {
         background-color: #b038f5;
         color: #fff;
         font-weight: 600;
+        font-size: 100%;
         padding: 10px 20px;
         border: 2px solid #ff6aff;
         border-radius: 10px;
@@ -215,8 +219,8 @@
         transition: background-color 0.3s ease;
     }
 
-    #music-btn:hover,
-    #reset:hover {
+    .music:hover,
+    .reset-btn:hover {
         background-color: #a12ec5;
     }
 
@@ -224,6 +228,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 16px
     }
 
     .info span {
@@ -233,6 +238,10 @@
         font-style: italic;
         font-weight: 600;
         font-size: larger;
+    }
+
+    .reset-btn {
+        padding: 11px 28px;
     }
 
 
@@ -281,7 +290,7 @@
             gap: 2rem;
             padding: 1rem 1.5rem;
             border-radius: 10px;
-            transition: left 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+            transition: left 0.6s cubic-bezier(0.33, 1, 0.68, 1);
             display: flex;
             align-items: center;
         }
@@ -307,10 +316,12 @@
 
         .hamburger {
             display: flex;
+            transform: scale(1.25);
             justify-content: flex-end;
         }
 
         .close {
+            transform: scale(1.2);
             display: none;
         }
 
@@ -325,18 +336,45 @@
 
         .logo-text,
         .logo-text span {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
 
         .game-container {
-            margin-top: 30px;
+            margin-top: 10px;
             flex-direction: column;
             gap: 20px;
+            min-height: auto;
+        }
+
+        .game-info {
+            transform: none;
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 10px;
+            gap: 6px;
         }
 
         .game-info h1 {
-            font-size: 140%;
+            text-align: center;
+            font-size: 1.6rem;
             letter-spacing: 0.7px;
+        }
+
+        .info span {
+            font-size: 1.4rem;
+        }
+
+        .music {
+            font-size: 110%;
+        }
+
+        .turn {
+            gap: 10px;
+        }
+
+        .reset-btn {
+            font-size: 110%;
         }
 
     }

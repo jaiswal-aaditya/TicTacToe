@@ -111,7 +111,7 @@ const UltimateBoard = () => {
     };
 
     return (
-        <div className="relative grid grid-cols-3 gap-3 p-1.5 max-w-md mx-auto">
+        <div className="relative grid grid-cols-3 gap-3 p-1.5 min-[860px]:w-[min(38.7vw,900px)] mx-auto">
 
                     {/* Vertical Lines */}
             <div className="absolute w-1 rounded-full inset-y-0 left-1/3 -translate-x-1/2 bg-slate-800/90 shadow-[0_0_10px_rgba(57,255,20,0.4),0_0_3px_rgba(57,255,20,0.5)]" />
