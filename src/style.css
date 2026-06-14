@@ -7,6 +7,7 @@
         background-color: #616161;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #f0f0f0;
+        overflow-y: hidden;
     }
 
     .navbar {
@@ -17,7 +18,7 @@
         position: sticky;
         top: 0;
         z-index: 1000;
-        margin-bottom: 2px;
+        margin-bottom: 1px;
     }
 
     .container {
@@ -166,11 +167,9 @@
         cursor: pointer;
         background-color: #ea8e0e;
         height: 5px;
-        height: 1.6%;
         width: 80%;
         border: 1px solid black;
         border-radius: 3px;
-        position: absolute;
         top: 50%;
         right: 50%;
         transition: transform 0.5s ease-in-out;
@@ -179,7 +178,8 @@
     }
 
     .box img,
-    .info img {
+    .info img,
+    .imgbox img {
         user-select: none;
         pointer-events: none;
         -webkit-user-drag: none;
@@ -228,7 +228,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 16px
+        gap: 16px;
     }
 
     .info span {
@@ -266,6 +266,10 @@
     @media (max-width: 860px) {
         * {
             font-size: 1rem;
+        }
+
+        body{
+            overflow-y: visible;
         }
 
         .disabled {
@@ -339,6 +343,11 @@
             font-size: 1.4rem;
         }
 
+        .win-line {
+            height: 1.6%;
+
+        }
+
         .game-container {
             margin-top: 10px;
             flex-direction: column;
@@ -371,6 +380,7 @@
 
         .turn {
             gap: 10px;
+            margin-bottom: -4px;
         }
 
         .reset-btn {

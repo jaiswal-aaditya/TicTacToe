@@ -30,7 +30,7 @@ const MiniBoard = ({ cells, boardIndex, onCellClick, isActive, isCurrentPlayerX,
                 <div className="backface-hidden">
                     <div className={` relative grid grid-cols-3 gap-1 p-2 border-2 rounded-xl transition-all
                         ${  winner==='X'
-                                ?'border-cyan-500/70 bg-cyan-800/30 shadow-[0_0_22px_rgba(34,211,238,0.55)] select-none pointer-events-none'
+                                ?'border-cyan-500/70 bg-cyan-800/30 shadow-[0_0_18px_rgba(34,211,238,0.55)] select-none pointer-events-none'
                             : winner==='O'
                                 ? 'border-pink-500/70 bg-pink-900/30 shadow-[0_0_22px_rgba(236,72,153,0.55)] select-none pointer-events-none '
                             : winner === 'D'
@@ -125,14 +125,14 @@ const MiniBoard = ({ cells, boardIndex, onCellClick, isActive, isCurrentPlayerX,
                             {winner === 'X' && (
                                 <img
                                 src={squareImg}
-                                className="w-full brightness-105 saturate-200 hue-rotate-205 text-[#ff5e5e] select-none pointer-events-none"
+                                className="w-full brightness-105 saturate-200 hue-rotate-205 text-[#ff5e5e] text-2xl! md:text-4xl! select-none pointer-events-none "
                                 alt="X won"
                                 />
                             )}
                             {winner === 'O' && (
                                 <img
                                 src={circleImg}
-                                className="w-full text-[#f924ce] select-none pointer-events-none"
+                                className="w-full text-[#f924ce] text-2xl! md:text-4xl! select-none pointer-events-none"
                                 alt="O won"
                                 />
                             )}
@@ -143,7 +143,7 @@ const MiniBoard = ({ cells, boardIndex, onCellClick, isActive, isCurrentPlayerX,
                                     <div className="w-1/2 h-full overflow-hidden relative">
                                         <img
                                             src={squareImg}
-                                            className="brightness-105 saturate-200 hue-rotate-205 text-[#b2b2b2] absolute top-0 left-0 w-[200%] h-full object-cover select-none pointer-events-none"
+                                            className="brightness-105 saturate-200 hue-rotate-205 text-[#b2b2b2] text-2xl! md:text-4xl! absolute top-0 left-0 w-[200%] h-full object-cover select-none pointer-events-none"
                                             alt="Draw"
                                         />
                                     </div>
@@ -152,7 +152,7 @@ const MiniBoard = ({ cells, boardIndex, onCellClick, isActive, isCurrentPlayerX,
                                     <div className="w-1/2 h-full overflow-hidden relative">
                                         <img
                                             src={circleImg}
-                                            className="absolute top-0 -left-full w-[200%] h-full object-cover select-none pointer-events-none"
+                                            className="text-2xl! md:text-4xl! absolute top-0 -left-full w-[200%] h-full object-cover select-none pointer-events-none"
                                             alt="Draw"
                                         />
                                     </div>

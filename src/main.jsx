@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { initializeClassicGame } from './script.js';
-import App from './App.jsx'
+import App, { initializeUltimateMusic } from './App.jsx'
 
 const ultimateBtn = document.getElementById('ultimate')
 const homeBtn = document.getElementById('home')
@@ -130,6 +130,14 @@ window.addEventListener('popstate', handleRouting)
 
 ultimateBtn.addEventListener('click', (e) => {
   e.preventDefault()
+  if (window.location.pathname === '/ultimate') {
+    navLinks.classList.remove("active")
+    hamburger.classList.remove("active")
+    close.classList.remove("active")
+    initializeUltimateMusic();
+    return
+  }
+
   window.history.pushState({}, "", "/ultimate")
   navLinks.classList.remove("active")
   hamburger.classList.remove("active")

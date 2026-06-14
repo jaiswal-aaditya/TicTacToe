@@ -15,7 +15,10 @@ let turn = "X";
 let isPlaying = false;
 let gameOver = false;
 
-document.querySelector(".info img").style.filter= "hue-rotate(205deg) saturate(2) brightness(105%)";
+document.querySelector(".info img").style.filter = "hue-rotate(205deg) saturate(2) brightness(105%)";
+document.querySelector(".info img").style.borderColor = "rgba(0, 247, 255, 0.6)";
+document.querySelector(".info img").style.color = "#ff3a3a";
+document.querySelector(".info img").style.fontSize = "3rem";
 
 const setNavbarHeight = () => {
     const height = navbar.offsetHeight;
@@ -38,13 +41,13 @@ const checkWin = () => {
         if ((imgboxes[e[0]].alt === imgboxes[e[1]].alt) && (imgboxes[e[1]].alt === imgboxes[e[2]].alt) && (imgboxes[e[0]].alt !== "")) {
             document.querySelector(".win-line").style.transform = `translate(${e[3]}%, ${e[4]}%) rotate(${e[5]}deg) scaleX(${e[6]})`;
 
-            document.querySelector(".info span").innerText = "Won:  ";
+            document.querySelector(".info span").innerText = "Won:\u00A0\u00A0";
             document.querySelector(".imgbox").getElementsByTagName("img")[0].style.width = "45%";
             if (imgboxes[e[0]].alt === "X") {
                 boxes[e[1]].classList.add("win-box-X");
                 boxes[e[2]].classList.add("win-box-X");
                 boxes[e[0]].classList.add("win-box-X");
-            } else{
+            } else {
                 boxes[e[1]].classList.add("win-box-O");
                 boxes[e[2]].classList.add("win-box-O");
                 boxes[e[0]].classList.add("win-box-O");
@@ -95,26 +98,41 @@ app.addEventListener("click", (e) => {
         if (!img || !img.hidden) return;
 
         if (turn === "X") {
-        img.src = triangleImg;
-        img.style.filter = `
+            img.src = triangleImg;
+            img.style.filter = `
             hue-rotate(205deg)
             saturate(2)
-            brightness(105%)
-        `;
+            brightness(105%)`
+            img.style.borderColor = "rgba(0, 247, 255, 0.6)";
+            img.style.color = "#ff3a3a";
+            img.style.fontSize = "3rem";;
         } else {
             img.src = circleImg;
             img.style.filter = "none";
+            img.style.borderColor = "rgba(255, 0, 255, 0.7)";
+            img.style.color = "#f924ce";
+            img.style.fontSize = "3rem";
         }
         img.alt = turn;
         img.hidden = false;
 
         turn = turn === "X" ? "O" : "X";
         checkWin();
-        
+
         if (!gameOver) {
-            player.src = turn === "X" ? triangleGuard : circleGuard;
-            if(turn==="X") player.style.filter= "hue-rotate(205deg) saturate(2) brightness(105%)";
-            else player.style.filter="none";
+            player.src = turn === "X" ? triangleGuard : circleGuard ;
+            if (turn === "X") {
+                player.style.filter = "hue-rotate(205deg) saturate(2) brightness(105%)";
+                player.style.borderColor = "rgba(0, 247, 255, 0.6)";
+                player.style.color = "#ff3a3a";
+                player.style.fontSize = "3rem";
+            }
+            else {
+                player.style.filter = "none";
+                player.style.borderColor = "rgba(255, 0, 255, 0.7)";
+                player.style.color = "#f924ce";
+                player.style.fontSize = "3rem";
+            }
             player.alt = turn;
         }
     }
@@ -132,7 +150,10 @@ app.addEventListener("click", (e) => {
 
         turn = "X";
         gameOver = false;
-        player.style.filter= "hue-rotate(205deg) saturate(2) brightness(105%)";
+        player.style.filter = "hue-rotate(205deg) saturate(2) brightness(105%)";
+        player.style.borderColor = "rgba(0, 247, 255, 0.6)";
+        player.style.color = "#ff3a3a";
+        player.style.fontSize = "3rem";
 
         app.querySelector(".info img").src = triangleGuard;
         app.querySelector(".info img").alt = turn;
@@ -156,7 +177,7 @@ app.addEventListener("click", (e) => {
 export function initializeClassicGame() {
     turn = "X";
     gameOver = false;
-    
+
     music.pause();
     music.currentTime = 0;
     isPlaying = false;

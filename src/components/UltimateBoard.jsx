@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import MiniBoard from './MiniBoard';
 
-const UltimateBoard = () => {
-    const [boards, setBoards] = useState(Array(9).fill(null).map(() => Array(9).fill(null)));
+const UltimateBoard = ({ xIsNext, setXIsNext, setGameResult }) => {
+    const [boards, setBoards] = useState(() => Array(9).fill(null).map(() => Array(9).fill(null)));
     const [activeBoard, setActiveBoard] = useState(null);
-    const [xIsNext, setXIsNext] = useState(true);
 
     const [boardWinners, setBoardWinners] = useState(Array(9).fill(null));
     const [miniBoardWinLines, setMiniBoardWinLines] = useState(Array(9).fill(null));
-    
+
     const [ultimateWinner, setUltimateWinner] = useState(null);
     const [ultimateWinningLine, setUltimateWinningLine] = useState(null);
     const [showWinLine, setShowWinLine] = useState(false);
@@ -17,13 +16,13 @@ const UltimateBoard = () => {
 
     const checkWin = (miniBoard) => {
         const wins = [
-            [0, 1, 2], 
+            [0, 1, 2],
             [3, 4, 5],
             [6, 7, 8],
             [0, 3, 6],
-            [1, 4, 7], 
+            [1, 4, 7],
             [2, 5, 8],
-            [0, 4, 8], 
+            [0, 4, 8],
             [2, 4, 6]
         ];
         for (let i = 0; i < wins.length; i++) {
@@ -32,11 +31,11 @@ const UltimateBoard = () => {
 
                 return {
                     winner: miniBoard[a],
-                    line: [a,b,c]
+                    line: [a, b, c]
                 };
             }
         }
-         // Check Draw state
+        // Check Draw state
         const isDraw = miniBoard.every(cell => cell !== null);
 
         if (isDraw) {
@@ -50,14 +49,14 @@ const UltimateBoard = () => {
             line: null
         };
     };
-    
+
     const handleCellClick = (boardIdx, cellIdx) => {
-        if (ultimateWinner) return; 
-        if (boardWinners[boardIdx]) return; 
+        if (ultimateWinner) return;
+        if (boardWinners[boardIdx]) return;
         if (boards[boardIdx][cellIdx]) return;
 
         // Update the specific cell
-        const newBoards = [...boards];  
+        const newBoards = [...boards];
         newBoards[boardIdx] = [...newBoards[boardIdx]];
         newBoards[boardIdx][cellIdx] = xIsNext ? 'X' : 'O';
         setBoards(newBoards);
@@ -68,7 +67,7 @@ const UltimateBoard = () => {
         if (result.winner) {
             newBoardWinners[boardIdx] = result.winner;
             setBoardWinners(newBoardWinners);
-            
+
             if (result.winner === 'X' || result.winner === 'O') {
                 // Save the specific line array (e.g., [0,1,2]) for this specific board index
                 setMiniBoardWinLines(prev => {
@@ -81,6 +80,7 @@ const UltimateBoard = () => {
             const globalResult = checkWin(newBoardWinners);
             if (globalResult.winner === 'X' || globalResult.winner === 'O') {
                 setUltimateWinner(globalResult.winner);
+                setGameResult(globalResult.winner);
                 setUltimateWinningLine(globalResult.line);
                 setTimeout(() => {
                     setShowWinLine(true);
@@ -90,6 +90,7 @@ const UltimateBoard = () => {
             }
             else if (globalResult.winner === 'D') {
                 setUltimateWinner('D');
+                setGameResult('D');
                 setActiveBoard(null);
                 return;
             }
@@ -113,11 +114,11 @@ const UltimateBoard = () => {
     return (
         <div className="relative grid grid-cols-3 gap-3 p-1.5 min-[860px]:w-[min(38.7vw,900px)] mx-auto">
 
-                    {/* Vertical Lines */}
+            {/* Vertical Lines */}
             <div className="absolute w-1 rounded-full inset-y-0 left-1/3 -translate-x-1/2 bg-slate-800/90 shadow-[0_0_10px_rgba(57,255,20,0.4),0_0_3px_rgba(57,255,20,0.5)]" />
             <div className="absolute w-1 rounded-full inset-y-0 left-2/3 -translate-x-1/2 bg-slate-800/90 shadow-[0_0_10px_rgba(57,255,20,0.4),0_0_3px_rgba(57,255,20,0.5)]" />
 
-                    {/* Horizontal Lines */}
+            {/* Horizontal Lines */}
             <div className="absolute h-1 rounded-full inset-x-0 top-1/3 -translate-y-1/2  bg-slate-800/90 shadow-[0_0_10px_rgba(57,255,20,0.4),0_0_3px_rgba(57,255,20,0.5)]" />
             <div className="absolute h-1 rounded-full inset-x-0 top-2/3 -translate-y-1/2 bg-slate-800/90 shadow-[0_0_10px_rgba(57,255,20,0.4),0_0_3px_rgba(57,255,20,0.5)]" />
 
@@ -135,20 +136,20 @@ const UltimateBoard = () => {
                     style={{
                         width:
                             line === '012' ||
-                            line === '345' ||
-                            line === '678'
+                                line === '345' ||
+                                line === '678'
                                 ? '95%'
 
-                                :line === '048' ||
-                                 line === '246'
+                                : line === '048' ||
+                                    line === '246'
                                     ? '130%'
 
                                     : '6px',
 
                         height:
                             line === '036' ||
-                            line === '147' ||
-                            line === '258'
+                                line === '147' ||
+                                line === '258'
                                 ? '95%'
 
                                 : '6px',
@@ -171,7 +172,7 @@ const UltimateBoard = () => {
                                         ? '83.5%'
                                         : '50%',
 
-                        transform:`
+                        transform: `
                             translate(-50%, -50%)
                         
                             ${line === '048'
@@ -181,13 +182,12 @@ const UltimateBoard = () => {
                                     : ''
                             }
 
-                            ${
-                            line === '036' ||
-                            line === '147' ||
-                            line === '258'
+                            ${line === '036' ||
+                                line === '147' ||
+                                line === '258'
                                 ? `scaleY(${showWinLine ? 1 : 0})`
                                 : line === '048' ||
-                                  line === '246'
+                                    line === '246'
                                     ? `scale(${showWinLine ? 1 : 0})`
                                     : `scaleX(${showWinLine ? 1 : 0})`
                             }
@@ -205,7 +205,7 @@ const UltimateBoard = () => {
                     isCurrentPlayerX={xIsNext}
                     winner={boardWinners[i]}
                     miniBoardWinLine={miniBoardWinLines[i]}
-                    winLine={ultimateWinningLine} />                
+                    winLine={ultimateWinningLine} />
             ))}
 
         </div>
