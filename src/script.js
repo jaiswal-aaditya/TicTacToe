@@ -178,8 +178,13 @@ export function initializeClassicGame() {
     turn = "X";
     gameOver = false;
 
-    music.pause();
-    music.currentTime = 0;
+    if (music) {
+        music.pause();
+        music.currentTime = 0;
+    }
     isPlaying = false;
-    document.querySelector("#music-btn").textContent = "🔊 Play\u00A0\u00A0Track";
+    const musicBtn = document.querySelector("#music-btn");
+    if (musicBtn) {
+        musicBtn.textContent = "🔊 Play\u00A0\u00A0Track";
+    }
 }

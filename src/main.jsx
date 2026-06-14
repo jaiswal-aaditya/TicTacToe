@@ -18,7 +18,9 @@ const classicContainer = ultimateContainer.cloneNode(true).childNodes
 let root = null
 
 function mountReact() {
+  ultimateContainer.innerHTML = '';
   initializeClassicGame();
+
   if (!root) {
     root = createRoot(ultimateContainer)
   }
@@ -84,12 +86,12 @@ function render404() {
         <div class="flex flex-col md:flex-row justify-center gap-8 mt-13! md:mt-12!">
         <button data-path="/" 
           class="nav-btn cursor-pointer md:order-2 px-10 py-4 bg-[#8315ea] hover:bg-[#a12ec5] text-white font-bold rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_25px_rgba(131,21,234,0.6)] border-2 border-[#ff6aff] tracking-widest">
-          RETURN TO HOME
+          PLAY CLASSIC MODE
         </button>
 
         <button data-path="/ultimate" 
         class="nav-btn cursor-pointer md:order-1 px-12 py-4 bg-[#181818] hover:bg-[#000000] text-white font-bold rounded-full transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_25px_rgba(131,21,234,0.6)] border-2 border-[#ff6aff] tracking-widest">
-        ULTIMATE PAGE
+        PLAY ULTIMATE MODE
         </button>
         </div>
       </div>
