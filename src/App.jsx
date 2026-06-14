@@ -44,7 +44,9 @@ function App() {
   initializeUltimateMusic = ultimateMusic;
 
   return (
-    <div className="min-[860px]:flex min-[860px]:justify-center min-[860px]:items-center min-[860px]:gap-18">
+    <div className="min-[860px]:flex min-[860px]:justify-center min-[860px]:items-center min-[860px]:gap-18"
+    style={{ minHeight: 'calc(100dvh - var(--navbar-height, 70px))' }}>
+
       {/* UltimateBoard */}
       <div className="min-[860px]:relative min-[860px]:left-0 min-[860px]:shrink-0">
         <UltimateBoard

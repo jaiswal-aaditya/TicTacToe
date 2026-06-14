@@ -117,11 +117,12 @@
 
     .game-container {
         /* background-color: red; */
-        margin-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 50px;
+        min-height: calc(100vh - var(--navbar-height, 70px)); 
+        width: 100%;
     }
 
     .containers {
