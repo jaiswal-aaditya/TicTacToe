@@ -120,11 +120,11 @@ cd TicTacToe
 ```
 3. **Install development and framework dependencies:**
 ```bash
-npm install
+pnpm install
 ```
 4. **Launch the local development environment:**
 ```bash
-npm run dev
+pnpm dev
 ```
 5. **Open the displayed local URL address (typically http://localhost:5173) inside your browser.**
 
