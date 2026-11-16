@@ -18,6 +18,50 @@ This project is a **Hybrid Web Application**:
 
 ---
 
+## 📸 Screenshots
+
+### 📐 Responsive View
+
+<table align="center">
+  <tr>
+    <th align="center">🖥️ Desktop View</th>
+    <th align="center">📱 Mobile View</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/desktop.png" width="500" alt="Desktop View" />
+    </td>
+    <td align="center">
+      <img src="screenshots/mobile.jpeg" width="270" alt="Mobile View" />
+    </td>
+  </tr>
+</table>
+
+### 🏆 Winning States
+
+<table align="center">
+  <tr>
+    <th align="center">🟢 Classic Mode</th>
+    <th align="center">🔴 Ultimate Mode</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/classic-win.png" width="530" alt="Classic Mode Winner" />
+    </td>
+    <td align="center">
+      <img src="screenshots/ultimate-win.png" width="500" alt="Ultimate Mode Winner" />
+    </td>
+  </tr>
+</table>
+
+### 🚧 Custom 404 Page
+
+<p align="center">
+  <img src="screenshots/404.jpeg" width="250" alt="Custom 404 Page" />
+</p>
+
+---
+
 ## 🛠️ Tech Stack
 
 This project leverages a **Hybrid Web Architecture** to deliver two completely distinct gameplay mechanics within a unified application layout:
